@@ -1,35 +1,35 @@
+import { ReactNode } from "react";
+
+import Section from "@/components/Section";
+import Paragraph from "@/components/Paragraph";
+import Title from "@/components/Title";
+
 // Component for displaying a highlighted text with amber background and border
-const HighlightText = ({ text }) => (
+const HighlightText = ({ text }: { text: String }) => (
   <span className="font-bold inline mx-1 py-0.5 px-1.5 border border-amber-400 bg-amber-50 rounded">
     {text}
   </span>
 );
 
 // Component for displaying a list item
-const ListItem = ({ children }) => <li className="mt-1">{children}</li>;
+const ListItem = ({ children }: { children: ReactNode }) => (
+  <li className="mt-1">{children}</li>
+);
 
 // Component for displaying a strong text with or without margins
-const Strong = ({ hasMargin = false, children }) => (
-  <strong className={hasMargin ? "mx-1" : ""}>{children}</strong>
-);
-
-// Component for a section with border top
-const Section = ({ children }) => (
-  <div className="mt-6 border-t pt-6">{children}</div>
-);
-
-// Component for a paragraph
-const Paragraph = ({ margin = 1, children }) => (
-  <p className={`mt-${margin}`}>{children}</p>
-);
+const Strong = ({
+  hasMargin = false,
+  children,
+}: {
+  hasMargin?: Boolean;
+  children: ReactNode;
+}) => <strong className={hasMargin ? "mx-1" : ""}>{children}</strong>;
 
 export default function Home() {
   return (
     <main className="bg-amber-50 p-4 min-h-screen">
       <div className="p-4 max-w-[720px] mx-auto bg-white rounded shadow">
-        <h1 className="font-bold text-4xl text-center">
-          Frontend Engineer Assessment
-        </h1>
+        <Title text="Frontend Engineer Assessment" />
         <Paragraph margin={6}>
           Welcome to our frontend engineer assessment! This test is designed to
           evaluate your frontend development skills and related knowledge.
