@@ -1,3 +1,28 @@
+// Component for displaying a highlighted text with amber background and border
+const HighlightText = ({ text }) => (
+  <span className="font-bold inline mx-1 py-0.5 px-1.5 border border-amber-400 bg-amber-50 rounded">
+    {text}
+  </span>
+);
+
+// Component for displaying a list item
+const ListItem = ({ children }) => <li className="mt-1">{children}</li>;
+
+// Component for displaying a strong text with or without margins
+const Strong = ({ hasMargin = false, children }) => (
+  <strong className={hasMargin ? "mx-1" : ""}>{children}</strong>
+);
+
+// Component for a section with border top
+const Section = ({ children }) => (
+  <div className="mt-6 border-t pt-6">{children}</div>
+);
+
+// Component for a paragraph
+const Paragraph = ({ margin = 1, children }) => (
+  <p className={`mt-${margin}`}>{children}</p>
+);
+
 export default function Home() {
   return (
     <main className="bg-amber-50 p-4 min-h-screen">
@@ -5,85 +30,81 @@ export default function Home() {
         <h1 className="font-bold text-4xl text-center">
           Frontend Engineer Assessment
         </h1>
-        <p className="mt-6">
+        <Paragraph margin={6}>
           Welcome to our frontend engineer assessment! This test is designed to
           evaluate your frontend development skills and related knowledge.
-        </p>
-        <p className="mt-4">
+        </Paragraph>
+        <Paragraph margin={4}>
           Please read each question carefully and imagine them as typical work
           tasks. Respond in the same manner you would during your regular work.
-        </p>
-        <p className="mt-4">
+        </Paragraph>
+        <Paragraph margin={4}>
           You can create any folders, ts/tsx/css files you need at any position
           that you think is appropriate.
-        </p>
-        <p className="mt-4">Here's the requirements for the assessment:</p>
+        </Paragraph>
+        <Paragraph margin={4}>
+          Here's the requirements for the assessment:
+        </Paragraph>
         <ul className="list-decimal pl-6">
-          <li className="mt-1">
-            <strong>NEVER</strong> change anything in the directories named in
+          <ListItem>
+            <Strong>NEVER</Strong> change anything in the directories named in
             the pattern
-            <span className="font-bold inline mx-1 py-0.5 px-1.5 border border-amber-400 bg-amber-50 rounded">
-              **/api/**
-            </span>
-          </li>
-          <li className="mt-1">Style with tailwindcss and css file.</li>
-          <li className="mt-1">
+            <HighlightText text="**/api/**" />
+          </ListItem>
+          <ListItem>Style with tailwindcss and css file.</ListItem>
+          <ListItem>
             Use
-            <span className="font-bold inline mx-1 py-0.5 px-1.5 border border-amber-400 bg-amber-50 rounded">
-              axios
-            </span>
+            <HighlightText text="axios" />
             to fetch data
-          </li>
-          <li className="mt-1">
+          </ListItem>
+          <ListItem>
             Implement Responsive Web Design (RWD) with a breakpoint at 768px (md
             in tailwindcss default breakpoints)
-          </li>
-          <li className="mt-1">
-            <p>
+          </ListItem>
+          <ListItem>
+            <Paragraph margin={0}>
               Submit the URL of your answer repository by
-              <strong className="mx-1">
+              <Strong hasMargin>
                 23:59 on the 5th day after receiving the questions,
-              </strong>
+              </Strong>
               and cease answering (pushing commits). For example: if you receive
               the questions on Mar 1st, you should submit the answer by 23:59 on
               Mar 5th.
-            </p>
-          </li>
+            </Paragraph>
+          </ListItem>
         </ul>
-        <p className="mt-4">Good luck! Let's get started.</p>
-        <div className="mt-6 border-t pt-6">
+        <Paragraph margin={4}>Good luck! Let's get started.</Paragraph>
+        <Section>
           <h2 className="text-xl font-bold">Problem 1: Refactoring</h2>
-          <p className="mt-1">
+          <Paragraph>
             For this task, your objective is to refactor the current page
             following your coding conventions and best practices. Look for
             opportunities to enhance code structure, eliminate redundancy,
             clarify variable names, and simplify complex logic.
-          </p>
-        </div>
-        <div className="mt-6 border-t pt-6">
+          </Paragraph>
+        </Section>
+        <Section>
           <h2 className="text-xl font-bold">Problem 2: Maze</h2>
-          <p className="mt-1">
+          <Paragraph>
             For this task, your objective is to implement a page where a mouse
             traverses a maze to find cheese.
-          </p>
-          <p className="mt-4">
+          </Paragraph>
+          <Paragraph margin={4}>
             During server-side rendering, you need to hit the
-            <span className="font-bold inline mx-1 py-0.5 px-1.5 border border-amber-400 bg-amber-50 rounded">
-              /api/maze
-            </span>
+            <HighlightText text="/api/maze" />
             endpoint to fetch the maze map array and display all the maps along
             with their respective start buttons on the screen. When the user
             clicks the start button, the mouse on that map will begin to solve
             the maze using Depth-First Search (DFS), with each step taking 100
             ms.
-          </p>
-          <p className="mt-4">
+          </Paragraph>
+          <Paragraph margin={4}>
             Meanwhile, the start button will disappear, replaced by a reset
             button. Clicking the reset button will stop the mouse's movement,
             reset the map to its initial state, and the reset button will be
             replaced by the start button again.
-          </p>
-          <p className="mt-4">
+          </Paragraph>
+          <Paragraph margin={4}>
             <a
               className="underline font-bold text-amber-500 cursor-pointer hover:text-amber-400 mr-1"
               href="https://youtube.com/shorts/uA744cMSNK8?si=U80OGTvH3rGV17zu"
@@ -92,93 +113,71 @@ export default function Home() {
               Click
             </a>
             to watch a demonstration of the expected behavior.
-          </p>
-          <p className="mt-4">Note that:</p>
+          </Paragraph>
+          <Paragraph margin={4}>Note that:</Paragraph>
           <ul className="list-decimal pl-6">
-            <li className="mt-1">
+            <ListItem>
               Put this page at the route
-              <span className="font-bold inline mx-1 py-0.5 px-1.5 border border-amber-400 bg-amber-50 rounded">
-                /find-the-cheese
-              </span>
-              , and title it
-              <strong className="mx-1">'Find the cheese'.</strong>
-            </li>
-            <li className="mt-1">
+              <HighlightText text="/find-the-cheese" />, and title it
+              <Strong hasMargin>'Find the cheese'.</Strong>
+            </ListItem>
+            <ListItem>
               Add description, "Click 'Start' to see how the mouse find the
               cheese by using DFS!", below page title
-            </li>
-            <li className="mt-1">
+            </ListItem>
+            <ListItem>
               The color of the walls is
-              <span className="font-bold inline mx-1 py-0.5 px-1.5 border border-amber-400 bg-amber-50 rounded">
-                green-800
-              </span>
-            </li>
-            <li className="mt-1">
+              <HighlightText text="green-800" />
+            </ListItem>
+            <ListItem>
               The color of the path is
-              <span className="font-bold inline mx-1 py-0.5 px-1.5 border border-amber-400 bg-amber-50 rounded">
-                lime-50
-              </span>
-            </li>
-            <li className="mt-1">
+              <HighlightText text="lime-50" />
+            </ListItem>
+            <ListItem>
               The icon of the mouse is
-              <span className="font-bold inline mx-1 py-0.5 px-1.5 border border-amber-400 bg-amber-50 rounded">
-                LuRat
-              </span>
+              <HighlightText text="LuRat" />
               with color
-              <span className="font-bold inline mx-1 py-0.5 px-1.5 border border-amber-400 bg-amber-50 rounded">
-                neutral-500
-              </span>
-            </li>
-            <li className="mt-1">
+              <HighlightText text="neutral-500" />
+            </ListItem>
+            <ListItem>
               The icon of the cheese is
-              <span className="font-bold inline mx-1 py-0.5 px-1.5 border border-amber-400 bg-amber-50 rounded">
-                FaCheese
-              </span>
+              <HighlightText text="FaCheese" />
               with color
-              <span className="font-bold inline mx-1 py-0.5 px-1.5 border border-amber-400 bg-amber-50 rounded">
-                amber-400
-              </span>
-            </li>
-            <li className="mt-1">
+              <HighlightText text="amber-400" />
+            </ListItem>
+            <ListItem>
               Highlight current path with color
-              <span className="font-bold inline mx-1 py-0.5 px-1.5 border border-amber-400 bg-amber-50 rounded">
-                amber-200
-              </span>
-            </li>
-            <li className="mt-1">
+              <HighlightText text="amber-200" />
+            </ListItem>
+            <ListItem>
               The button has a background color of amber-500, and a hover
               background color of amber-400.
-            </li>
-            <li className="mt-1">
-              <span className="font-bold inline mx-1 py-0.5 px-1.5 border border-amber-400 bg-amber-50 rounded">
-                /api/maze
-              </span>
+            </ListItem>
+            <ListItem>
+              <HighlightText text="/api/maze" />
               simulates an endpoint on another server, so you need to use axios
               to fetch the data.
-            </li>
+            </ListItem>
           </ul>
-        </div>
-        <div className="mt-6 border-t pt-6">
+        </Section>
+        <Section>
           <h2 className="text-xl font-bold">Problem 3: Layout</h2>
-          <p className="mt-1">
+          <Paragraph>
             For this task, your objective is to create and apply a global shared
             layout. The layout should consist of:
-          </p>
+          </Paragraph>
           <ul className="list-decimal pl-6">
-            <li className="mt-1">
+            <ListItem>
               A header displaying
-              <strong className="mx-1">'Jedi Software'</strong> that collapses
-              when scrolling up and reappears when scrolling stops.
-            </li>
-            <li className="mt-1">
+              <Strong hasMargin>'Jedi Software'</Strong> that collapses when
+              scrolling up and reappears when scrolling stops.
+            </ListItem>
+            <ListItem>
               A collapsible menu offering redirection to the homepage and
-              <span className="font-bold inline mx-1 py-0.5 px-1.5 border border-amber-400 bg-amber-50 rounded">
-                /find-the-cheese
-              </span>
-              .
-            </li>
+              <HighlightText text="/find-the-cheese" />.
+            </ListItem>
           </ul>
-        </div>
+        </Section>
       </div>
     </main>
   );
