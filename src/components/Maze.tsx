@@ -26,11 +26,6 @@ const MazeCell = ({ type }: { type: String }) => {
 
   // Set cellColor based on the type of MazeCell
   switch (type) {
-    // case "start":
-    //   icon = (
-    //     <LuRat className="w-full h-full p-1 text-neutral-500 bg-amber-200" />
-    //   );
-    //   break;
     case "end":
       icon = <FaCheese className="w-full h-full p-1 text-amber-400" />;
       break;
@@ -59,7 +54,6 @@ export default function Maze({
   className?: String;
 }) {
   const [ratPosition, setRatPosition] = useState({ x: -1, y: -1 }); // Initialize rat position
-  const [foundCheese, setFoundCheese] = useState(false);
 
   useEffect(() => {
     // Function to find the position of "start"
@@ -91,6 +85,7 @@ export default function Maze({
       { dx: 1, dy: 0 }, // Right
     ];
 
+    // run the interval every 100ms to simulate rat movement
     const interval = setInterval(() => {
       if (stack.length === 0) {
         clearInterval(interval);
@@ -108,6 +103,7 @@ export default function Maze({
         const newX = current.x + direction.dx;
         const newY = current.y + direction.dy;
 
+        // move the rat position along the "path" until it reaches "end"
         if (
           newX >= 0 &&
           newX < maze[0].length &&
@@ -120,8 +116,8 @@ export default function Maze({
           stack.push({ x: newX, y: newY });
           setRatPosition({ x: newX, y: newY });
 
+          // clear the interval when the rat finds the cheese
           if (maze[newY][newX] === "end") {
-            setFoundCheese(true);
             clearInterval(interval);
             return;
           }
