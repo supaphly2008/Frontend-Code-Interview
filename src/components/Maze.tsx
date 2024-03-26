@@ -1,4 +1,4 @@
-// Component for a paragraph
+// Component for a maze
 import { ReactNode } from "react";
 import Maze from "@/model/api/maze/maze";
 import { LuRat } from "react-icons/lu";
