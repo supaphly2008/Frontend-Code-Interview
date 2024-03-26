@@ -11,9 +11,7 @@ const MazeWrapper = ({
   className?: String;
   children: ReactNode;
 }) => (
-  <div className={`relative flex flex-col items-center ${className}`}>
-    {children}
-  </div>
+  <div className={`flex flex-col items-center ${className}`}>{children}</div>
 );
 
 const MazeRow = ({ children }: { children: ReactNode }) => (
@@ -150,6 +148,7 @@ export default function Maze({
           />
         </div>
       </MazeWrapper>
+
       <div
         className="bg-amber-400 py-1 rounded-sm cursor-pointer mt-4"
         onClick={handleStart}
