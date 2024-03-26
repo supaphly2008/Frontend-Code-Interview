@@ -1,15 +1,12 @@
 import axios from "axios";
-import Maze from "@/model/api/maze/maze";
+import MazeType from "@/model/api/maze/maze";
 
+import Maze from "@/components/Maze";
 import Paragraph from "@/components/Paragraph";
 import Title from "@/components/Title";
+import Section from "@/components/Section";
 
-interface Props {
-  mazeData: Maze[];
-}
-
-export default function FindTheCheese({ mazeData }: Props) {
-  console.log("mazeData", mazeData);
+export default function FindTheCheese({ mazeData }: { mazeData: MazeType[] }) {
   return (
     <main className="bg-amber-50 p-4 min-h-screen">
       <div className="p-4 max-w-[720px] mx-auto bg-white rounded shadow text-center">
@@ -17,6 +14,18 @@ export default function FindTheCheese({ mazeData }: Props) {
         <Paragraph margin={6}>
           Click 'Start' to see how the mouse find the cheese by using DFS!
         </Paragraph>
+
+        {/* maze */}
+        {mazeData.map((maze, index) => (
+          <div key={index}>
+            {index !== 0 && (
+              <Section>
+                <Maze maze={maze} />
+              </Section>
+            )}
+            {index === 0 && <Maze className="mt-6" maze={maze} />}
+          </div>
+        ))}
       </div>
     </main>
   );
