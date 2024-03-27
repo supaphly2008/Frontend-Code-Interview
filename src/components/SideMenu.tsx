@@ -1,16 +1,11 @@
-import { ReactNode } from "react";
 import Link from "next/link";
 import { FaHome } from "react-icons/fa";
 import { LuRat } from "react-icons/lu";
 
-interface Props {
-  children: ReactNode; // Explicitly define children prop type as ReactNode
-}
-
-export default function SideMenu() {
+export default function SideMenu({ isOpen }: { isOpen: boolean }) {
   return (
     <div
-      className={`w-64 h-full bg-gray-600 fixed top-0 left-0 z-20 overflow-y-auto`}
+      className={`w-64 h-full bg-gray-600 fixed top-0 left-0 z-20 transition-transform duration-300 ease-in-out transform ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
     >
       <nav className="text-white">
         <ul>

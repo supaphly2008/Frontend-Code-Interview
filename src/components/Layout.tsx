@@ -22,13 +22,14 @@ const Layout = ({ children }: { children: ReactNode }) => {
       </main>
 
       <div className="relative">
-        {menuOpen && <SideMenu />}
+        <SideMenu isOpen={menuOpen} />
+
         {/* Overlay */}
         {menuOpen && (
           <div
             className="fixed inset-0 bg-black opacity-50 z-10"
             onClick={toggleMenu}
-          ></div>
+          />
         )}
       </div>
     </>

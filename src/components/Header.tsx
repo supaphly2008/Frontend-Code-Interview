@@ -36,18 +36,16 @@ export default function Header({ toggleMenu }: { toggleMenu: any }) {
   }, [scrollPos, prevScrollPos]);
 
   return (
-    <>
-      <div
-        className={`fixed z-10 top-0 w-full transition-all duration-300 ${visible ? "translate-y-0" : "-translate-y-full"}`}
-      >
-        <header className="flex justify-between items-center bg-gray-800 text-white p-4 text-center">
-          <GiHamburgerMenu
-            className="text-[24px] cursor-pointer"
-            onClick={toggleMenu}
-          />
-          <h1 className="text-2xl">Jedi Software</h1>
-        </header>
-      </div>
-    </>
+    <div
+      className={`fixed z-10 top-0 w-full transition-all duration-300 ${visible ? "translate-y-0" : "-translate-y-full"}`}
+    >
+      <header className="flex justify-between items-center bg-gray-800 text-white p-4 text-center">
+        <GiHamburgerMenu
+          className="text-[24px] cursor-pointer"
+          onClick={toggleMenu}
+        />
+        <h1 className="text-2xl">Jedi Software</h1>
+      </header>
+    </div>
   );
 }
