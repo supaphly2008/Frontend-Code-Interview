@@ -21,7 +21,7 @@ export default function About() {
       </Paragraph>
 
       <Section>
-        <h2 className="text-xl font-bold">Experience</h2>
+        <h2 className="text-xl font-bold">Recent Project</h2>
         <Paragraph>
           I founded{" "}
           <a
