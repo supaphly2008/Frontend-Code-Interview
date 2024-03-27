@@ -8,26 +8,24 @@ import Section from "@/components/Section";
 
 export default function FindTheCheese({ mazeData }: { mazeData: MazeType[] }) {
   return (
-    <main className="bg-amber-50 p-4 min-h-screen">
-      <div className="p-4 max-w-[720px] mx-auto bg-white rounded shadow text-center">
-        <Title text="Find the cheese" />
-        <Paragraph margin={6}>
-          Click 'Start' to see how the mouse find the cheese by using DFS!
-        </Paragraph>
+    <div className="p-4 max-w-[720px] mx-auto bg-white rounded shadow text-center">
+      <Title text="Find the cheese" />
+      <Paragraph margin={6}>
+        Click 'Start' to see how the mouse find the cheese by using DFS!
+      </Paragraph>
 
-        {/* maze */}
-        {mazeData.map((maze, index) => (
-          <div key={index}>
-            {index !== 0 && (
-              <Section>
-                <Maze maze={maze} />
-              </Section>
-            )}
-            {index === 0 && <Maze className="mt-6" maze={maze} />}
-          </div>
-        ))}
-      </div>
-    </main>
+      {/* maze */}
+      {mazeData.map((maze, index) => (
+        <div key={index}>
+          {index !== 0 && (
+            <Section>
+              <Maze maze={maze} />
+            </Section>
+          )}
+          {index === 0 && <Maze className="mt-6" maze={maze} />}
+        </div>
+      ))}
+    </div>
   );
 }
 
