@@ -14,7 +14,7 @@ export default function About() {
 
       <Paragraph margin={6}>
         I am an experienced front-end developer 🤓 who is fascinated by
-        JavaScript frameworks, including AngularJS, Angular, and Vue. These
+        JavaScript frameworks, including AngularJS, React, and Vue. These
         frameworks not only make development faster but also more enjoyable. I
         find it fulfilling to work with these tools, and they allow me to create
         dynamic and engaging web applications with ease 💯.
@@ -35,7 +35,7 @@ export default function About() {
           available both online and onsite. This system enables hairdressers to
           effortlessly monitor the status of customers, while customers can
           conveniently check the queue status, including the number of people
-          waiting. , I have successfully developed a face recognition app that
+          waiting. I have successfully developed a face recognition app that
           will maintain a record of customers' hairstyles. This will eliminate
           the need for customers to explain their desired hairstyle on
           subsequent visits, as the app will recognize and recall their
