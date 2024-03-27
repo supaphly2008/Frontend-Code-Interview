@@ -18,12 +18,18 @@ const MENU_ITEMS = [
   },
 ];
 
-export default function SideMenu({ isOpen }: { isOpen: boolean }) {
+export default function SideMenu({
+  isMenuOpen,
+  toggleMenu,
+}: {
+  isMenuOpen: boolean;
+  toggleMenu: () => void;
+}) {
   const router = useRouter(); // Initialize useRouter hook
 
   return (
     <div
-      className={`w-64 h-full bg-gray-600 fixed top-0 left-0 z-20 transition-transform duration-300 ease-in-out transform ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
+      className={`w-64 h-full bg-gray-600 fixed top-0 left-0 z-20 transition-transform duration-300 ease-in-out transform ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
     >
       <div className="h-[150px] flex justify-center items-center border-b border-gray-500">
         <Avatar>Jedi Software</Avatar>
@@ -35,7 +41,11 @@ export default function SideMenu({ isOpen }: { isOpen: boolean }) {
               className={`transition-bg duration-300 hover:bg-gray-700 ${router.pathname === menu.path ? "bg-gray-700" : ""}`}
               key={index}
             >
-              <Link className="p-3 flex items-center" href={menu.path}>
+              <Link
+                className="p-3 flex items-center"
+                href={menu.path}
+                onClick={toggleMenu}
+              >
                 <div className="mr-2">{menu.icon}</div>
                 <p className="capitalize">{menu.text}</p>
               </Link>

@@ -5,10 +5,10 @@ import Header from "@/components/Header";
 import SideMenu from "@/components/SideMenu";
 
 const Layout = ({ children }: { children: ReactNode }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
@@ -22,10 +22,10 @@ const Layout = ({ children }: { children: ReactNode }) => {
       </main>
 
       <div className="relative">
-        <SideMenu isOpen={menuOpen} />
+        <SideMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
 
         {/* Overlay */}
-        {menuOpen && (
+        {isMenuOpen && (
           <div
             className="fixed inset-0 bg-black opacity-50 z-10"
             onClick={toggleMenu}
