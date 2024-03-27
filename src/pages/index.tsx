@@ -5,7 +5,7 @@ import Paragraph from "@/components/Paragraph";
 import Title from "@/components/Title";
 
 // Component for displaying a highlighted text with amber background and border
-const HighlightText = ({ text }: { text: String }) => (
+const HighlightText = ({ text }: { text: string }) => (
   <span className="font-bold inline mx-1 py-0.5 px-1.5 border border-amber-400 bg-amber-50 rounded">
     {text}
   </span>
@@ -21,7 +21,7 @@ const Strong = ({
   hasMargin = false,
   children,
 }: {
-  hasMargin?: Boolean;
+  hasMargin?: boolean;
   children: ReactNode;
 }) => <strong className={hasMargin ? "mx-1" : ""}>{children}</strong>;
 

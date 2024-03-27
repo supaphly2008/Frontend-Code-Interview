@@ -1,9 +1,4 @@
 // Component for a paragraph
-
-interface Props {
-  text: String;
-}
-
-export default function Title({ text }: Props) {
+export default function Title({ text }: { text: string }) {
   return <h1 className="font-bold text-4xl text-center">{text}</h1>;
 }

@@ -8,7 +8,7 @@ const MazeWrapper = ({
   className,
   children,
 }: {
-  className?: String;
+  className?: string;
   children: ReactNode;
 }) => (
   <div className={`flex flex-col items-center ${className}`}>{children}</div>
@@ -18,7 +18,7 @@ const MazeRow = ({ children }: { children: ReactNode }) => (
   <div className="flex">{children}</div>
 );
 
-const MazeCell = ({ type, visited }: { type: String; visited: boolean }) => {
+const MazeCell = ({ type, visited }: { type: string; visited: boolean }) => {
   let cellColor = ""; // Initialize cellColor variable
   let icon = null; // Initialize icon variable
 
@@ -53,12 +53,12 @@ export default function Maze({
   className,
 }: {
   maze: Maze;
-  className?: String;
+  className?: string;
 }) {
   const [ratPosition, setRatPosition] = useState({ x: -1, y: -1 }); // Initialize rat position
   const [visited, setVisited] = useState<boolean[][]>([]);
-  const [mazeRunning, setMazeRunning] = useState(false);
-  const [cheeseFound, setCheeseFound] = useState(false);
+  const [mazeRunning, setMazeRunning] = useState<boolean>(false);
+  const [cheeseFound, setCheeseFound] = useState<boolean>(false);
   const intervalIdRef = useRef<number | null>(null);
 
   const initializeMap = useCallback(() => {

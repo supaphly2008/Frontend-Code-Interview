@@ -2,7 +2,7 @@
 import { ReactNode } from "react";
 
 interface Props {
-  margin?: Number;
+  margin?: number;
   children: ReactNode; // Explicitly define children prop type as ReactNode
 }
 
