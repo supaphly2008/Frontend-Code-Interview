@@ -17,13 +17,12 @@ const getInitials = (str: string) => {
 };
 
 export default function Avatar({ size = 100, src, alt, children }: Props) {
-  const sizeClasses = `w-[${size}px] h-[${size}px]`;
-
   // Render text if children is provided
   if (children) {
     return (
       <div
-        className={`${sizeClasses} bg-amber-300 uppercase rounded-full flex justify-center items-center text-[32px] font-bold text-white`}
+        className="bg-amber-300 uppercase rounded-full flex justify-center items-center text-[32px] font-bold text-white"
+        style={{ height: `${size}px`, width: `${size}px` }}
       >
         <span>{getInitials(children as string)}</span>
       </div>
@@ -34,7 +33,8 @@ export default function Avatar({ size = 100, src, alt, children }: Props) {
   if (src) {
     return (
       <div
-        className={`${sizeClasses} rounded-full flex justify-center items-center`}
+        className="rounded-full flex justify-center items-center"
+        style={{ height: `${size}px`, width: `${size}px` }}
       >
         <div className="relative w-full h-full">
           <Image
