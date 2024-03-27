@@ -1,5 +1,5 @@
 // Component for a maze
-import { ReactNode, useState, useEffect } from "react";
+import { ReactNode, useState, useEffect, useCallback, useRef } from "react";
 import Maze from "@/model/api/maze/maze";
 import { LuRat } from "react-icons/lu";
 import { FaCheese } from "react-icons/fa";
@@ -18,12 +18,16 @@ const MazeRow = ({ children }: { children: ReactNode }) => (
   <div className="flex">{children}</div>
 );
 
-const MazeCell = ({ type }: { type: String }) => {
+const MazeCell = ({ type, visited }: { type: String; visited: boolean }) => {
   let cellColor = ""; // Initialize cellColor variable
   let icon = null; // Initialize icon variable
 
   // Set cellColor based on the type of MazeCell
   switch (type) {
+    case "start":
+      cellColor = "bg-amber-200";
+      icon = null;
+      break;
     case "end":
       icon = <FaCheese className="w-full h-full p-1 text-amber-400" />;
       break;
@@ -32,7 +36,7 @@ const MazeCell = ({ type }: { type: String }) => {
       icon = null;
       break;
     case "path":
-      cellColor = "bg-lime-50"; // Color for the path cell (lime-50)
+      cellColor = visited ? "bg-amber-200" : "bg-lime-50"; // Color for the path cell (lime-50)
       icon = null;
       break;
     default:
@@ -52,8 +56,18 @@ export default function Maze({
   className?: String;
 }) {
   const [ratPosition, setRatPosition] = useState({ x: -1, y: -1 }); // Initialize rat position
+  const [visited, setVisited] = useState<boolean[][]>([]);
+  const [mazeRunning, setMazeRunning] = useState(false);
+  const [cheeseFound, setCheeseFound] = useState(false);
+  const intervalIdRef = useRef<number | null>(null);
 
-  useEffect(() => {
+  const initializeMap = useCallback(() => {
+    // Initialize visited state based on maze dimensions
+    const initialVisited = new Array(maze.length)
+      .fill(false)
+      .map(() => new Array(maze[0].length).fill(false));
+    setVisited(initialVisited);
+
     // Function to find the position of "start"
     const findStartPosition = () => {
       for (let y = 0; y < maze.length; y++) {
@@ -65,16 +79,19 @@ export default function Maze({
         }
       }
     };
-
     findStartPosition();
-  }, [maze]); // Run this effect whenever maze changes
+  }, [maze]);
+
+  useEffect(() => {
+    initializeMap();
+  }, [initializeMap]); // Run this effect whenever maze changes
 
   const moveRatDFS = () => {
-    const visited = new Array(maze.length)
-      .fill(false)
-      .map(() => new Array(maze[0].length).fill(false));
     const stack = [{ x: ratPosition.x, y: ratPosition.y }];
-    visited[ratPosition.y][ratPosition.x] = true;
+
+    // Clone the visited state to avoid directly modifying it
+    const updatedVisited = visited.map((row) => [...row]);
+    updatedVisited[ratPosition.y][ratPosition.x] = true;
 
     const directions = [
       { dx: 0, dy: -1 }, // Up
@@ -84,9 +101,9 @@ export default function Maze({
     ];
 
     // run the interval every 100ms to simulate rat movement
-    const interval = setInterval(() => {
+    const id = setInterval(() => {
       if (stack.length === 0) {
-        clearInterval(interval);
+        clearInterval(id);
         return;
       }
 
@@ -108,24 +125,44 @@ export default function Maze({
           newY >= 0 &&
           newY < maze.length &&
           (maze[newY][newX] === "path" || maze[newY][newX] === "end") &&
-          !visited[newY][newX]
+          !updatedVisited[newY][newX]
         ) {
-          visited[newY][newX] = true;
+          updatedVisited[newY][newX] = true;
           stack.push({ x: newX, y: newY });
           setRatPosition({ x: newX, y: newY });
 
           // clear the interval when the rat finds the cheese
           if (maze[newY][newX] === "end") {
-            clearInterval(interval);
+            setMazeRunning(false);
+            setCheeseFound(true);
+            clearInterval(id);
             return;
           }
         }
       }
     }, 100);
+    // Update the visited state after each move
+    setVisited(updatedVisited);
+    intervalIdRef.current = id as any; // Store the interval ID in the ref
   };
 
+  useEffect(() => {
+    if (mazeRunning) {
+      moveRatDFS();
+    } else if (!mazeRunning && !cheeseFound) {
+      clearInterval(intervalIdRef.current as number);
+      initializeMap();
+    }
+  }, [mazeRunning, initializeMap, cheeseFound]);
+
   const handleStart = () => {
-    moveRatDFS();
+    if (!mazeRunning && cheeseFound) {
+      setCheeseFound(false);
+      setMazeRunning(false);
+      initializeMap();
+    } else {
+      setMazeRunning((prev) => !prev);
+    }
   };
 
   return (
@@ -134,9 +171,16 @@ export default function Maze({
         <div className="relative">
           {maze.map((row, rowIndex) => (
             <MazeRow key={`row-${rowIndex}`}>
-              {row.map((type, columnIndex) => (
-                <MazeCell type={type} key={`cell-${rowIndex}-${columnIndex}`} />
-              ))}
+              {row.map(
+                (type, columnIndex) =>
+                  visited.length && (
+                    <MazeCell
+                      visited={visited[rowIndex][columnIndex]}
+                      type={type}
+                      key={`cell-${rowIndex}-${columnIndex}`}
+                    />
+                  )
+              )}
             </MazeRow>
           ))}
           <LuRat
@@ -153,7 +197,7 @@ export default function Maze({
         className="bg-amber-400 py-1 rounded-sm cursor-pointer mt-4"
         onClick={handleStart}
       >
-        Start
+        {mazeRunning || cheeseFound ? "Restart" : "Start"}
       </div>
     </>
   );

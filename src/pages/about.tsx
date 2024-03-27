@@ -1,15 +1,23 @@
+import { useViewportWidth } from "@/hooks/useViewportWidth";
+
 import Paragraph from "@/components/Paragraph";
 import Title from "@/components/Title";
 import Avatar from "@/components/Avatar";
 import Section from "@/components/Section";
 
 export default function About() {
+  const { isMobile } = useViewportWidth();
+
   return (
     <div className="p-4 max-w-[720px] mx-auto bg-white rounded shadow text-center">
       <Title text="More about myself" />
 
       <div className="flex justify-center mt-6">
-        <Avatar size={200} src="https://i.pravatar.cc/300" alt="Avatar" />
+        <Avatar
+          size={isMobile ? 150 : 200}
+          src="https://i.pravatar.cc/300"
+          alt="Avatar"
+        />
       </div>
 
       <Paragraph margin={6}>
