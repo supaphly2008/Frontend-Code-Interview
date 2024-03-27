@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FaHome } from "react-icons/fa";
 import { LuRat } from "react-icons/lu";
 import { useRouter } from "next/router"; // Import useRouter hook
+import { RxAvatar } from "react-icons/rx";
 
 import Avatar from "@/components/Avatar";
 
@@ -15,6 +16,11 @@ const MENU_ITEMS = [
     path: "/find-the-cheese",
     text: "Find the Cheese",
     icon: <LuRat />,
+  },
+  {
+    path: "/about",
+    text: "About me",
+    icon: <RxAvatar />,
   },
 ];
 

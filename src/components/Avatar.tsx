@@ -5,6 +5,7 @@ interface Props {
   children?: ReactNode; // Explicitly define children prop type as ReactNode
   src?: string;
   alt?: string;
+  size?: number; // size of width and height in px
 }
 
 const getInitials = (str: string) => {
@@ -15,11 +16,15 @@ const getInitials = (str: string) => {
   return initials;
 };
 
-export default function Avatar({ src, alt, children }: Props) {
+export default function Avatar({ size = 100, src, alt, children }: Props) {
+  const sizeClasses = `w-[${size}px] h-[${size}px]`;
+
   // Render text if children is provided
   if (children) {
     return (
-      <div className="w-[100px] h-[100px] bg-amber-300 uppercase rounded-full overflow-hidden flex justify-center items-center text-[32px] font-bold text-white">
+      <div
+        className={`${sizeClasses} bg-amber-300 uppercase rounded-full flex justify-center items-center text-[32px] font-bold text-white`}
+      >
         <span>{getInitials(children as string)}</span>
       </div>
     );
@@ -28,12 +33,16 @@ export default function Avatar({ src, alt, children }: Props) {
   // Render image if src is provided
   if (src) {
     return (
-      <div className="w-[100px] h-[100px] bg-amber-300 rounded-full overflow-hidden flex justify-center items-center text-[32px] font-bold text-white">
+      <div
+        className={`${sizeClasses} rounded-full flex justify-center items-center`}
+      >
         <div className="relative w-full h-full">
           <Image
             src={src}
-            alt={alt || ""} // Provide empty string as alt if alt is not provided
-            layout="fill"
+            alt={alt || ""}
+            layout="responsive" // Update layout prop to "responsive"
+            width={size} // Set width and height for responsive layout
+            height={size}
             objectFit="cover"
             className="rounded-full"
           />
