@@ -153,6 +153,7 @@ export default function Maze({
       clearInterval(intervalIdRef.current as number);
       initializeMap();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mazeRunning, initializeMap, cheeseFound]);
 
   const handleStart = () => {
