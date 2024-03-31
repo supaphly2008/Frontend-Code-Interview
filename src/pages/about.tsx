@@ -4,13 +4,14 @@ import Paragraph from "@/components/Paragraph";
 import Title from "@/components/Title";
 import Avatar from "@/components/Avatar";
 import Section from "@/components/Section";
+import ContentWrapper from "@/components/ContentWrapper";
 
 export default function About() {
   const { isMobile } = useViewportWidth();
 
   return (
-    <div className="p-4 max-w-[720px] mx-auto bg-white rounded shadow text-center">
-      <Title text="More about myself" />
+    <ContentWrapper isTextCenter>
+      <Title text="😎 More about myself 😎" />
 
       <div className="flex justify-center mt-6">
         <Avatar
@@ -50,6 +51,6 @@ export default function About() {
           preferences.
         </Paragraph>
       </Section>
-    </div>
+    </ContentWrapper>
   );
 }

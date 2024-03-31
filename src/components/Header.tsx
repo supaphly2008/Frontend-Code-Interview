@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function Header({ toggleMenu }: { toggleMenu: any }) {
+  const router = useRouter();
+
   const [scrollPos, setScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -35,6 +38,10 @@ export default function Header({ toggleMenu }: { toggleMenu: any }) {
     };
   }, [scrollPos, prevScrollPos]);
 
+  const gotoHomePage = () => {
+    router.push("/");
+  };
+
   return (
     <div
       className={`fixed z-10 top-0 w-full transition-all duration-300 ${visible ? "translate-y-0" : "-translate-y-full"}`}
@@ -44,7 +51,9 @@ export default function Header({ toggleMenu }: { toggleMenu: any }) {
           className="text-[24px] cursor-pointer"
           onClick={toggleMenu}
         />
-        <h1 className="text-2xl">Jedi Software</h1>
+        <h1 className="text-2xl cursor-pointer" onClick={gotoHomePage}>
+          Jedi Software
+        </h1>
       </header>
     </div>
   );

@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import Section from "@/components/Section";
 import Paragraph from "@/components/Paragraph";
 import Title from "@/components/Title";
+import ContentWrapper from "@/components/ContentWrapper";
 
 // Component for displaying a highlighted text with amber background and border
 const HighlightText = ({ text }: { text: string }) => (
@@ -27,7 +28,7 @@ const Strong = ({
 
 export default function Home() {
   return (
-    <div className="p-4 max-w-[720px] mx-auto bg-white rounded shadow">
+    <ContentWrapper>
       <Title text="Frontend Engineer Assessment" />
       <Paragraph margin={6}>
         Welcome to our frontend engineer assessment! This test is designed to
@@ -176,6 +177,6 @@ export default function Home() {
           </ListItem>
         </ul>
       </Section>
-    </div>
+    </ContentWrapper>
   );
 }

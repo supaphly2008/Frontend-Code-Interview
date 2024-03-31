@@ -5,10 +5,11 @@ import Maze from "@/components/Maze";
 import Paragraph from "@/components/Paragraph";
 import Title from "@/components/Title";
 import Section from "@/components/Section";
+import ContentWrapper from "@/components/ContentWrapper";
 
 export default function FindTheCheese({ mazeData }: { mazeData: MazeType[] }) {
   return (
-    <div className="p-4 max-w-[720px] mx-auto bg-white rounded shadow text-center">
+    <ContentWrapper isTextCenter>
       <Title text="Find the cheese" />
       <Paragraph margin={6}>
         Click 'Start' to see how the mouse find the cheese by using DFS!
@@ -25,7 +26,7 @@ export default function FindTheCheese({ mazeData }: { mazeData: MazeType[] }) {
           {index === 0 && <Maze className="mt-6" maze={maze} />}
         </div>
       ))}
-    </div>
+    </ContentWrapper>
   );
 }
 
