@@ -2,32 +2,24 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { GiHamburgerMenu } from "react-icons/gi";
 
+import { useScroll } from "@/hooks/useScroll";
+
 export default function Header({ toggleMenu }: { toggleMenu: any }) {
   const router = useRouter();
+  const { scrollY } = useScroll();
 
   const [scrollPos, setScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
-  // add scroll event and set scroll Y position on component load
+  // set scroll y position
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollPos(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+    setScrollPos(scrollY);
+  }, [scrollY]);
 
   useEffect(() => {
-    if (scrollPos > prevScrollPos) {
-      setVisible(false);
-    } else {
-      setVisible(true);
-    }
+    // hide header when the scroll position is greater than the previous position
+    scrollPos > prevScrollPos ? setVisible(false) : setVisible(true);
 
     const timeoutId = setTimeout(() => {
       setPrevScrollPos(scrollPos);
